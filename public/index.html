@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NextEpisode - Gerenciador</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo">Next<span>Episode</span></div>
+
+    <nav class="nav-links">
+      <button onclick="filtrarStatus('all')" id="aba-all" class="nav-btn active">
+        📺 Todos
+      </button>
+
+      <button onclick="filtrarStatus('assistindo')" id="aba-assistindo" class="nav-btn">
+        🍿 Assistindo
+      </button>
+
+      <button onclick="filtrarStatus('planejado')" id="aba-planejado" class="nav-btn">
+        ⏳ Planejado
+      </button>
+
+      <button onclick="filtrarStatus('concluido')" id="aba-concluido" class="nav-btn">
+        🏆 Finalizadas
+      </button>
+    </nav>
+
+    <div class="user-menu" style="display: flex; align-items: center; gap: 12px">
+      <div id="userAvatar" class="user-avatar">PA</div>
+      <button id="btnLogout" class="btn-logout" style="
+            background: #e50914;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+          " onmouseover="this.style.background = '#b80710'" onmouseout="this.style.background = '#e50914'">
+        Sair
+      </button>
+    </div>
+  </header>
+
+  <div class="main-layout container">
+    <aside class="sidebar">
+      <div class="stats-panel">
+        <h2>Seu Perfil</h2>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-label">Tempo Maratonado</span>
+            <span id="total-horas" class="stat-value">0h</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Episódios Vistos</span>
+            <span id="total-episodios" class="stat-value">0</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Séries</span>
+            <span id="total-series" class="stat-value">0</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Concluídas</span>
+            <span id="series-concluidas" class="stat-value">0</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Assistindo</span>
+            <span id="series-assistindo" class="stat-value">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="manager-card">
+        <h3>Catalogar Nova Série</h3>
+
+        <form id="formulario-adicionar-serie" class="vertical-form">
+
+          <input type="text" id="campo-titulo" placeholder="Nome da Série" required />
+
+          <input type="text" id="campo-ano" placeholder="Ano (ex.: 2006 – 2013)" maxlength="20" />
+
+          <textarea id="campo-sinopse" placeholder="Sinopse da série..." maxlength="2000" rows="4"></textarea>
+
+          <div class="form-row">
+            <input type="number" id="campo-episodios" placeholder="Total Eps" required />
+
+            <input type="number" id="campo-duracao" placeholder="Min/Ep" />
+          </div>
+
+          <select id="campo-status">
+            <option value="planejado">
+              Quero Assistir (Planejado)
+            </option>
+
+            <option value="assistindo">
+              Começar a Assistir Agora
+            </option>
+
+            <option value="concluido">
+              Já Concluí Toda a Série
+            </option>
+          </select>
+
+          <input type="url" id="campo-imagem" placeholder="URL do Poster (Opcional)" />
+
+          <button type="submit" class="btn-primary">
+            ➕ Adicionar ao Sistema
+          </button>
+
+        </form>
+      </div>
+    </aside>
+
+    <main class="content-area">
+      <h2 id="titulo-secao">Todos os Seus Títulos</h2>
+
+      <input type="text" id="campo-busca" placeholder="🔍 Buscar série..." class="search-input" />
+
+      <div id="grid-series" class="series-grid"></div>
+    </main>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+
+</html>

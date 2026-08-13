@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: nextepisode-mysql
+
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nextepisode
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: root
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  app:
+    build: .
+
+    container_name: nextepisode-api
+
+    depends_on:
+      - mysql
+
+    ports:
+      - "3000:3000"
+
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: mysql
+      DB_PASSWORD: root
+      DB_NAME: nextepisode
+
+    restart: always
+
+volumes:
+  mysql_data:
